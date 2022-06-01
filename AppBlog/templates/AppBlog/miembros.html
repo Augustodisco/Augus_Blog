@@ -1,0 +1,41 @@
+{% extends "AppBlog/inicio.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+<p align="center"> MIS ALIADOS</p>
+
+<p> Yo no estoy solo en esta cruzada, siempre tuve aliados al lado mío, que desinteresadamente se ofrecieron a ayudarme, si queres
+    podes unirte. Es más, si simplemente te unieras capaz te daría una pequeña pista.
+</p>
+
+{% if miFormulario.errors %}
+
+<p style="color:red"> Los datos son incorrectos, intentá de nuevo</p>
+
+{% endif %}
+
+<form action="" method="POST"> {% csrf_token %}
+
+    <table>
+
+     {{miFormulario.as_table}}
+
+    </table>
+
+    <input type="submit" value="ENVIAR">
+</form>
+
+{% endblock %}
+
+{% block encabezado %}
+ 
+  Miembros
+
+{% endblock %}
+
+{% block titulo %} 
+
+<h1> Miembros: Mis fieles seguidores </h1>
+
+{% endblock %}

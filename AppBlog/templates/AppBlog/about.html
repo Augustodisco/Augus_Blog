@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ¿QUIEN SOY YO? </title>
-</head>
+{% extends "AppBlog/inicio.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+
 <body>
-    <p> Soy alguien misterioso, eso ya se sabe, pero para lograr llegar al tesoro tenes que conocerme un poco más 
+
+    <p align="center"> ¿QUIEN SOY YO? </p>
+
+    <p> Soy alguien misterioso, eso ya se sabe, pero para lograr llegar al tesoro tenes que conocerme un poco más.
         Esta información quizá te sirva, quizá no ¿Quien sabe?
         Ya seguro deducirás que nací en Capital Federal, en la Provincia de Buenos Aires, puede que en el 2001, puede que en
         el 2000, puede que en el 1998 o en el 2003. Siempre viví acá pero soy muy viajero, asi que si buscas los datos, 
@@ -32,8 +34,21 @@
         en vez de agua, toman el vino que fabrican allá por Mendoza....
     </p>
     <p>
-        Ya te dije demasiado! Dale, tenes que encontrarme y encontrar ese tesoro, fue muy fácil, mas no puedo darte.
+        ¡Ya te dije demasiado! Dale, tenes que encontrarme y encontrar ese tesoro, fue muy fácil, mas no puedo darte.
     </p>
 
 </body>
-</html>
+
+{% endblock %}
+
+{% block encabezado %}
+ 
+  Sobre mi
+
+{% endblock %}
+
+{% block titulo %} 
+
+<h1> Un poco sobre mí </h1>
+
+{% endblock %}

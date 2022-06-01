@@ -1,0 +1,34 @@
+{% extends "AppBlog/inicio.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+<p> Busco a {{apellido}}</p>
+
+{% if miembros %}
+
+<ul>
+{% for miembros in miembros %}
+    <li>{{miembros.nombre}}</li>
+    <li>{{miembros.apellido}}</li>
+
+{% endfor %}
+</ul>
+
+{% endif %}
+
+
+{% endblock %}
+
+{% block encabezado %}
+ 
+  Miembros
+
+{% endblock %}
+
+{% block titulo %} 
+
+<h1> Miembros: Mis fieles seguidores </h1>
+
+{% endblock %}
