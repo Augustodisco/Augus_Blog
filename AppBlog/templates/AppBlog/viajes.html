@@ -1,9 +1,20 @@
-{% extends "AppBlog/inicio.html" %}
+{% extends "AppBlog/padre.html" %}
 
 {% load static %}
 
 {% block contenidoquecambia %}
 
+<p> Aca te muestro mis viajes para que veas a dónde estuve</p>
+
+{% for viaje in viajes %}
+  
+  <li>{{viaje}}</li>
+  <button>
+      <a href="{% url 'eliminarviajes' viaje.lugar %}"> Eliminar</a>
+  </button>
+
+
+{% endfor %}
 
 {% endblock %}
 

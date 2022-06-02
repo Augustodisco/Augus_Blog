@@ -1,34 +1,45 @@
-{% extends "AppBlog/inicio.html" %}
+{% extends "AppBlog/padre.html" %}
 
 {% load static %}
 
 {% block contenidoquecambia %}
 
-<p> Busco a {{apellido}}</p>
+{% if not respuesta %}
 
-{% if miembros %}
+<p> ¡Felicidades! Encontraste a {{apellido}} por eso te doy otra pista ¡Muy bien!</p>
+<p> Estoy en un terreno bastante lindo, me puedo poner bajo el sol, con mucho protector, puedo hasta bañarme.</p>
+
+{% endif %}
+
+{% if miembro %}
 
 <ul>
-{% for miembros in miembros %}
+{% for miembros in miembro %}
     <li>{{miembros.nombre}}</li>
     <li>{{miembros.apellido}}</li>
-
 {% endfor %}
 </ul>
+
+{% else %}
+<p>No se encontró el apellido, intentá de nuevo, te di una pista</p>
 
 {% endif %}
 
 
+<p style="color:red">{{respuesta}}</p>
+
+
 {% endblock %}
+
 
 {% block encabezado %}
  
-  Miembros
+  Busqueda
 
 {% endblock %}
 
 {% block titulo %} 
 
-<h1> Miembros: Mis fieles seguidores </h1>
+<h1> Busqueda </h1>
 
 {% endblock %}

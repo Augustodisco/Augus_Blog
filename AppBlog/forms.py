@@ -5,3 +5,5 @@ class MiembrosFormulario (forms.Form):
     apellido=forms.CharField(max_length=50)
     fechanacimiento=forms.CharField(max_length=10)
     miembro_desde=forms.IntegerField()
+
+

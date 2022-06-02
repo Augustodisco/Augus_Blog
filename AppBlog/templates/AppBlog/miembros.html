@@ -1,12 +1,11 @@
-{% extends "AppBlog/inicio.html" %}
+{% extends "AppBlog/padre.html" %}
 
 {% load static %}
 
 {% block contenidoquecambia %}
-<p align="center"> MIS ALIADOS</p>
 
-<p> Yo no estoy solo en esta cruzada, siempre tuve aliados al lado mío, que desinteresadamente se ofrecieron a ayudarme, si queres
-    podes unirte. Es más, si simplemente te unieras capaz te daría una pequeña pista.
+<p> ¿Te pensabas que estaba solo? Obviamente tengo buenas personas, "socios", fieles seguidores que desinteresadamente me siguen en mis 
+    aventuras. Unite vos tambien quizá tengas una pista.
 </p>
 
 {% if miFormulario.errors %}
@@ -26,16 +25,33 @@
     <input type="submit" value="ENVIAR">
 </form>
 
+
+
+<p> Tambien podes buscar a uno de mis miembros, por el apellido. Podes no saber quienes son 
+  porque no te los dije, ni siquiera uno 
+</p>
+<p> ¿O si?</p>
+
+<form action="/AppBlog/buscar/" method="GET">
+  <input type="text" name="apellido" id="apellido">
+  <input type="submit" value="BUSCAR">
+
+
+
+
+
+</form>
+
 {% endblock %}
 
 {% block encabezado %}
  
-  Miembros
+  Unirse como Miembro
 
 {% endblock %}
 
 {% block titulo %} 
 
-<h1> Miembros: Mis fieles seguidores </h1>
+<h1> Unite! </h1>
 
 {% endblock %}

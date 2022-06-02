@@ -1,9 +1,22 @@
-{% extends "AppBlog/inicio.html" %}
+{% extends "AppBlog/padre.html" %}
 
 {% load static %}
 
 {% block contenidoquecambia %}
 
+<p> Antes de enfrascarme en esta aventura, fui un aspirante a Ingenieria en Sistemas.
+    Apenas llegue a una tecnicatura, ni a analista llegué. 
+    Aca te muestro mis proyectos para que conozcas este lado de mí. Si me encontras capaz te cuente anecdotas</p>
+
+{% for proyecto in proyectos %}
+  
+  <li>{{proyecto}}</li>
+  <button>
+      <a href="{% url 'eliminarproyectos' proyecto.nombre %}"> Eliminar </a>
+  </button>
+
+
+{% endfor %}
 
 {% endblock %}
 
@@ -15,6 +28,6 @@
 
 {% block titulo %} 
 
-<h1> Mis Proyectos </h1>
+<h1> Mis proyectos </h1>
 
 {% endblock %}

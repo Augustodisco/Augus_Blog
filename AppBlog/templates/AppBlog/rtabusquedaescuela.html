@@ -1,0 +1,49 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+{% if not respuesta %}
+
+<p> ¡Felicidades! Encontraste a {{lugar}} por eso te doy otra pista ¡Muy bien!</p>
+<p> Estoy en un lugar que no es tan conocido por muchos, por culpa de un lugar que va muy seguido la gente se pone bajo el sol,
+    se pone protector y puede hasta bañarse, y que es muy popular. El lugar a donde estoy tiene un nombre igual a dónde tus papas
+    te mandaban en cierta época con calor, si no querías que estes en casa tanto tiempo.
+    
+</p>
+
+{% endif %}
+
+{% if educacion_esp %}
+
+<ul>
+{% for educacion in educacion_esp %}
+    <li>{{educacion.lugar}}</li>
+    <li>{{educacion.año}}</li>
+{% endfor %}
+</ul>
+
+{% else %}
+<p>No se encontró el colegio, intentá de nuevo, te di una pista</p>
+
+{% endif %}
+
+
+<p style="color:red">{{respuesta}}</p>
+
+
+{% endblock %}
+
+
+{% block encabezado %}
+ 
+  Busqueda
+
+{% endblock %}
+
+{% block titulo %} 
+
+<h1> Busqueda </h1>
+
+{% endblock %}
