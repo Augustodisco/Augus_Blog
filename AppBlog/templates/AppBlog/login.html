@@ -1,0 +1,28 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+<form method="post"> {% csrf_token %}
+   {{formulario.as_p}}
+   <input type="submit" value="INICIAR SESIÓN">
+
+</form>
+
+
+
+{% endblock %}
+
+{% block encabezado %}
+ 
+  Login
+
+{% endblock %}
+
+
+{% block titulo %}
+
+    <h1> LOGIN </h1>
+
+{% endblock %}

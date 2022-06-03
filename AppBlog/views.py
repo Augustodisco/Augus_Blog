@@ -1,9 +1,12 @@
 from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render
-from AppBlog.forms import MiembrosFormulario
+from AppBlog.forms import MiembrosFormulario,  UserRegistrationForm
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -101,3 +104,40 @@ def eliminarproyectos (request, nombre):
     else:
         formulario=UserEditForm(instance=usuario)
     return render(request, 'AppBlog/editarperfil.html', {'formulario': formulario, 'usuario': usuario.username})"""
+
+#-------------------------------------LOGIN------------------------------------------------
+def login_request(request):
+    if request.method == 'POST':
+        formulario = AuthenticationForm(request=request, data=request.POST)
+        if formulario.is_valid():
+            usuario=formulario.cleaned_data.get('username')
+            clave=formulario.cleaned_data.get('password')
+            user=authenticate(username=usuario, password=clave) 
+            if user is not None:
+                 login(request, user)
+                 return render (request, 'AppBlog/rtalogin.html', {'usuario':usuario, 'mensaje':'Bienvenido al sistema'})
+            else:
+                return render(request,'AppBlog/rtalogin.html', {'mensaje':'Incorrecto vuelva a loguearse'})     
+        else:
+            return render (request, 'AppBlog/rtalogin.html', {'mensaje':'Formulario incorrecto, vuelva a ingresar otro'})
+    formulario=AuthenticationForm()
+    return render (request, 'AppBlog/login.html', {'formulario':formulario})
+
+def rtalogin (request):
+    return render (request, 'AppBlog/rtalogin.html')
+
+def register(request):
+    if request.method == 'POST':
+        formulario =UserRegistrationForm(request.POST)
+        if formulario.is_valid():
+            username=formulario.cleaned_data['username']
+            formulario.save()
+            return render (request, 'AppBlog/rtalogin.html', {'mensaje': f'Usuario: {username} creado exitosamente'})
+        else:
+             return render (request, 'AppBlog/rtalogin.html', {'mensaje':'No se pudo crear intente nuevemante'})
+    else:
+        formulario= UserRegistrationForm()
+        return render (request, 'AppBlog/register.html', {'formulario':formulario})
+
+
+
