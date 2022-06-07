@@ -9,7 +9,7 @@
 <form action="" method="POST"> {% csrf_token %}
 
     <table>
-        {{formulario.as_table}} 
+        {{miFormulario.as_table}} 
     </table>   
     <input type="submit" value="Guardar">
   
@@ -19,7 +19,7 @@
 
 {% block encabezado %}
  
- <p> Editar Perfil</p>
+ <p> Editar Perfil </p>
 
 {% endblock %}
 

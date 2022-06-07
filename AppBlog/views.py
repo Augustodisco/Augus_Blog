@@ -1,7 +1,8 @@
+from asyncio.windows_events import NULL
 from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render
-from AppBlog.forms import MiembrosFormulario,  UserRegistrationForm
+from AppBlog.forms import MiembrosFormulario, ProyectosFormulario, ViajesFormulario, UserRegistrationForm, UserEditForm
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
@@ -11,11 +12,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-def proyectos(request):
-    return render(request, 'AppBlog/proyectos.html') 
-
-def viajes(request):
-    return render(request, 'AppBlog/viajes.html') 
 
 def about(request):
     return render(request, 'AppBlog/about.html') 
@@ -23,8 +19,10 @@ def about(request):
 def educacion(request):
     return render(request, 'AppBlog/educacion.html') 
 
+@login_required
 def home (request):
-    return render(request, 'AppBlog/home.html')
+    avatar = Avatar.objects.filter(user=request.user.id)
+    return render(request, 'AppBlog/home.html', {'url' :avatar[0].imagen.url} )
 
 def miembros (request):
     if request.method == 'POST':
@@ -46,7 +44,11 @@ def buscar (request):
     if request.GET['apellido']:
         apellido = request.GET['apellido'] 
         miembro = Miembros.objects.filter(apellido=apellido)
-        return render(request, 'AppBlog/rtabusqueda.html', {'miembro': miembro , 'apellido': apellido})
+        if len(miembro) == 0:
+            respuesta="No se encontró un apellido correcto, tratá de nuevo, te di una pista antes"
+            return render(request, 'AppBlog/rtabusqueda.html', {'miembro': miembro , 'apellido': apellido, 'respuesta': respuesta})
+        else:
+            return render(request, 'AppBlog/rtabusqueda.html', {'miembro': miembro , 'apellido': apellido})
     else:
         respuesta="No enviaste un apellido, tratá de nuevo, te di una pista antes"
     
@@ -55,19 +57,25 @@ def buscar (request):
 def buscarescuela (request):
     if request.GET['lugar']:
         lugar = request.GET['lugar'] 
-        educacion_esp = Educacion.objects.filter(lugar=lugar)
-        return render(request, 'AppBlog/rtabusquedaescuela.html', {'educacion': educacion , 'lugar': lugar})
+        edu= Educacion.objects.filter(lugar=lugar)
+        if len(edu) == 0:
+            respuesta="No se encontró una escuela correcta, tratá de nuevo, te di una pista antes"
+            return render(request, 'AppBlog/rtabusquedaescuela.html', {'edu': edu , 'lugar': lugar, 'respuesta':respuesta})
+        else:
+            return render (request, 'AppBlog/rtabusquedaescuela.html', {'edu': edu , 'lugar': lugar})
     else:
-        respuesta="No enviaste una escuela correcta, tratá de nuevo, te di una pista antes"
+        respuesta="No enviaste ninguna escuela, tratá de nuevo, te di una pista antes"
     
     return render (request, 'AppBlog/rtabusquedaescuela.html', {'respuesta': respuesta})
+
+#------------------------------------------CRUD COMPLETO PROYECTO Y VIAJES-----------------------------------------------------
 
 def leerviajes (request):
     viajes = Viajes.objects.all()
     contexto = {'viajes': viajes}
     return render (request, 'AppBlog/viajes.html', contexto)
 
-def leerproyectos (request):
+def proyectos (request):
     proyectos = Proyectos.objects.all()
     contexto = {'proyectos': proyectos}
     return render (request, 'AppBlog/proyectos.html', contexto)
@@ -86,24 +94,70 @@ def eliminarproyectos (request, nombre):
     contexto = {'proyectos': proyectos}
     return render (request, 'AppBlog/proyectos.html', contexto)
 
+def proyecto_formulario(request):
+    if request.method == 'POST':
+        miFormulario = ProyectosFormulario(request.POST)
+        print (miFormulario)
+        if miFormulario.is_valid:
+            informacion = miFormulario.cleaned_data
+            proyecto = Proyectos (nombre=informacion['nombre'], año=informacion['año'])
+            proyecto.save()
+            return render (request, 'AppBlog/proyectos.html')
+    else:
+        miFormulario = ProyectosFormulario()
+    return render (request, 'AppBlog/proyectos.html' , {'miFormulario': miFormulario})
+
+def viajes (request):
+    if request.method == 'POST':
+        miFormulario = ViajesFormulario(request.POST)
+        print (miFormulario)
+        if miFormulario.is_valid:
+            informacion = miFormulario.cleaned_data
+            viaje = Viajes (destino=informacion['destino'], año=informacion['año'])
+            viaje.save()
+            return render (request, 'AppBlog/formviajesrecibido.html')
+    else:
+        miFormulario = ViajesFormulario()
+    return render (request, 'AppBlog/viajes.html', {'miFormulario':miFormulario})
+
+def formviajesrecibido (request):
+    return render (request, 'AppBlog/formviajesrecibido.html')
+
+"""def miembros (request):
+    if request.method == 'POST':
+        miFormulario = MiembrosFormulario(request.POST)
+        print (miFormulario)
+        if miFormulario.is_valid:
+            informacion = miFormulario.cleaned_data
+            miembro = Miembros (nombre=informacion['nombre'], apellido=informacion['apellido'], fechanacimiento=informacion['fechanacimiento'], miembro_desde=informacion['miembro_desde'])
+            miembro.save()
+            return render (request, 'AppBlog/formulariorecibido.html')
+    else:
+        miFormulario = MiembrosFormulario()
+    return render (request, 'AppBlog/miembros.html', {'miFormulario':miFormulario})"""
+
+
+
 
 #--------------------------------------AVATAR--------------------------------------
-"""def editarperfil(request):
 
-    #usuario=request.user
-    #if request.method == 'POST':
-        #formulario=UserEditForm(request.POST, instance=usuario)
-        #if formulario.is_valid():
-            #informacion=formulario.cleaned_data
-            #usuario.email=informacion['email']
-            usuario.password1=informacion['password1']
-            usuario.password2=informacion['password2']
+def editarperfil(request):
+
+    usuario=request.user
+    if request.method == 'POST':
+        miFormulario=UserEditForm(request.POST, instance=usuario)
+        if miFormulario.is_valid():
+            informacion=miFormulario.cleaned_data
+            usuario.email=informacion['email']
+            usuario.set_password1=informacion['password1']
+            usuario.set_password2=informacion['password2']
             usuario.save()
 
-            return render(request, 'AppBlog/home.html', {'usuario': usuario, 'mensaje':'PERFIL CREADO EXITOSAMENTE'})
+            return render(request, 'AppBlog/formurecibido2.html')
     else:
-        formulario=UserEditForm(instance=usuario)
-    return render(request, 'AppBlog/editarperfil.html', {'formulario': formulario, 'usuario': usuario.username})"""
+        miFormulario=UserEditForm(instance=usuario)
+    return render(request, 'AppBlog/editarperfil.html', {'miFormulario': miFormulario, 'usuario': usuario.username})
+
 
 #-------------------------------------LOGIN------------------------------------------------
 def login_request(request):
@@ -128,16 +182,16 @@ def rtalogin (request):
 
 def register(request):
     if request.method == 'POST':
-        formulario =UserRegistrationForm(request.POST)
-        if formulario.is_valid():
-            username=formulario.cleaned_data['username']
-            formulario.save()
-            return render (request, 'AppBlog/rtalogin.html', {'mensaje': f'Usuario: {username} creado exitosamente'})
+        Formulario = UserRegistrationForm(request.POST)
+        if Formulario.is_valid():
+            username=Formulario.cleaned_data['username']
+            Formulario.save()
+            return render (request, 'AppBlog/home.html')
         else:
-             return render (request, 'AppBlog/rtalogin.html', {'mensaje':'No se pudo crear intente nuevemante'})
+             return render (request, 'AppBlog/register.html',{'Formulario': Formulario, 'mensaje':'No se pudo crear intente nuevemante'})
     else:
-        formulario= UserRegistrationForm()
-        return render (request, 'AppBlog/register.html', {'formulario':formulario})
+        Formulario= UserRegistrationForm()
+        return render (request, 'AppBlog/register.html', {'Formulario':Formulario})
 
 
 

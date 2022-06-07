@@ -8,13 +8,36 @@
 
 {% for viaje in viajes %}
   
-  <li>{{viaje}}</li>
+  <li>{{viajes}}</li>
   <button>
-      <a href="{% url 'eliminarviajes' viaje.lugar %}"> Eliminar</a>
+       Eliminar
   </button>
 
 
 {% endfor %}
+
+{% if miFormulario.errors %}
+
+<p style="color:red"> Los datos son incorrectos, intentá de nuevo</p>
+
+{% endif %}
+
+<form action="" method="POST"> {% csrf_token %}
+
+    <table>
+
+      {{miFormulario.as_table}}
+
+    </table>
+
+    <input type="submit" value="ENVIAR">
+</form>
+
+
+
+
+
+
 
 {% endblock %}
 
