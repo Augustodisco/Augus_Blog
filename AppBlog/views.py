@@ -71,7 +71,7 @@ def buscarescuela (request):
 #------------------------------------------CRUD COMPLETO PROYECTO Y VIAJES-----------------------------------------------------
 
 def leerviajes (request):
-    viajes = Viajes.objects.all()
+    viajes = Viajes.objects.all(id=id)
     contexto = {'viajes': viajes}
     return render (request, 'AppBlog/viajes.html', contexto)
 
