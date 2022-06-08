@@ -4,11 +4,12 @@
 
 {% block contenidoquecambia %}
 
+{% if user.is_authenticated %}
 <div class="text-center">
     <img src="{{url}}" height="40px">
     <h3> Bienvenido {{user.username}} ¿Estas listo? </h3>
 </div>
-
+{% endif %}
 
 <p> Encontraste este enlace a esta pagina, no a mi, pero puede decirse que estas cerca de lo que buscas</p>
 
@@ -29,6 +30,10 @@
 <p>
     Seguí todo atentamente, si llegaste acá, es porque podes.
     Es más hasta aca hay un nombre que es una pista clave. Y otro nombre referido a la educación.
+</p>
+
+<p>
+   Si queres editar el perfil, usa editarperfil ahi arriba en la barra de direcciones
 </p>
 
 

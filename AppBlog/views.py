@@ -70,31 +70,7 @@ def buscarescuela (request):
 
 #------------------------------------------CRUD COMPLETO PROYECTO Y VIAJES-----------------------------------------------------
 
-def leerviajes (request):
-    viajes = Viajes.objects.all(id=id)
-    contexto = {'viajes': viajes}
-    return render (request, 'AppBlog/viajes.html', contexto)
-
-def proyectos (request):
-    proyectos = Proyectos.objects.all()
-    contexto = {'proyectos': proyectos}
-    return render (request, 'AppBlog/proyectos.html', contexto)
-
-def eliminarviajes (request, lugar):
-    viaje = Viajes.objects.get(lugar = lugar)
-    viaje.delete()
-    viajes = Viajes.objects.all()
-    contexto = {'viajes': viajes}
-    return render (request, 'AppBlog/viajes.html', contexto)
-
-def eliminarproyectos (request, nombre):
-    proyecto = Proyectos.objects.get(nombre=nombre)
-    proyecto.delete()
-    proyectos = Proyectos.objects.all()
-    contexto = {'proyectos': proyectos}
-    return render (request, 'AppBlog/proyectos.html', contexto)
-
-def proyecto_formulario(request):
+def proyectos(request):
     if request.method == 'POST':
         miFormulario = ProyectosFormulario(request.POST)
         print (miFormulario)
@@ -102,10 +78,20 @@ def proyecto_formulario(request):
             informacion = miFormulario.cleaned_data
             proyecto = Proyectos (nombre=informacion['nombre'], año=informacion['año'])
             proyecto.save()
-            return render (request, 'AppBlog/proyectos.html')
+            return render (request, 'AppBlog/formproyectosrecibido.html')
     else:
         miFormulario = ProyectosFormulario()
-    return render (request, 'AppBlog/proyectos.html' , {'miFormulario': miFormulario})
+    proyectos = Proyectos.objects.all()
+    contexto = {'proyectos': proyectos, 'miFormulario':miFormulario}
+    return render (request, 'AppBlog/proyectos.html', contexto)
+
+def formproyectosrecibido(request):
+    return render (request, 'AppBlog/formproyectosrecibido.html')
+
+def eliminarproyectos (request,id):   
+    proyecto = Proyectos.objects.get(id=id)
+    proyecto.delete()
+    return proyectos(request)  
 
 def viajes (request):
     if request.method == 'POST':
@@ -118,26 +104,49 @@ def viajes (request):
             return render (request, 'AppBlog/formviajesrecibido.html')
     else:
         miFormulario = ViajesFormulario()
-    return render (request, 'AppBlog/viajes.html', {'miFormulario':miFormulario})
+    viajes = Viajes.objects.all()
+    contexto = {'viajes': viajes, 'miFormulario':miFormulario}
+    return render (request, 'AppBlog/viajes.html', contexto)
 
 def formviajesrecibido (request):
     return render (request, 'AppBlog/formviajesrecibido.html')
 
-"""def miembros (request):
+def eliminarviajes (request,id):   
+    viaje = Viajes.objects.get(id=id)
+    viaje.delete()
+    return viajes(request)  
+
+def editarproyecto(request,id):
+    proyecto= Proyectos.objects.get(id=id)
     if request.method == 'POST':
-        miFormulario = MiembrosFormulario(request.POST)
-        print (miFormulario)
-        if miFormulario.is_valid:
-            informacion = miFormulario.cleaned_data
-            miembro = Miembros (nombre=informacion['nombre'], apellido=informacion['apellido'], fechanacimiento=informacion['fechanacimiento'], miembro_desde=informacion['miembro_desde'])
-            miembro.save()
-            return render (request, 'AppBlog/formulariorecibido.html')
+        miFormulario=ProyectosFormulario(request.POST)
+        if miFormulario.is_valid():
+            informacion=miFormulario.cleaned_data
+            proyecto.nombre=informacion['nombre']
+            proyecto.año=informacion['año']
+            proyecto.save()
+            proyectos=Proyectos.objects.all()
+            contexto= {'proyectos':proyectos}
+            return render (request, 'AppBlog/proyectos.html', contexto)
     else:
-        miFormulario = MiembrosFormulario()
-    return render (request, 'AppBlog/miembros.html', {'miFormulario':miFormulario})"""
+        miFormulario=ProyectosFormulario(initial={'nombre':proyecto.nombre, 'año':proyecto.año})
+    return render(request, 'AppBlog/editarproyecto.html', {'miFormulario':miFormulario, 'id':id})  
 
-
-
+def editarviajes(request,id):
+    viaje= Viajes.objects.get(id=id)
+    if request.method == 'POST':
+        miFormulario=ViajesFormulario(request.POST)
+        if miFormulario.is_valid():
+            informacion=miFormulario.cleaned_data
+            viaje.destino=informacion['destino']
+            viaje.año=informacion['año']
+            viaje.save()
+            viajes=Viajes.objects.all()
+            contexto= {'viajes':viajes}
+            return render (request, 'AppBlog/viajes.html', contexto)
+    else:
+        miFormulario=ViajesFormulario(initial={'destino':viaje.destino, 'año':viaje.año})
+    return render(request, 'AppBlog/editarviaje.html', {'miFormulario':miFormulario, 'id':id})
 
 #--------------------------------------AVATAR--------------------------------------
 
@@ -153,7 +162,7 @@ def editarperfil(request):
             usuario.set_password2=informacion['password2']
             usuario.save()
 
-            return render(request, 'AppBlog/formurecibido2.html')
+            return render(request, 'AppBlog/home.html')
     else:
         miFormulario=UserEditForm(instance=usuario)
     return render(request, 'AppBlog/editarperfil.html', {'miFormulario': miFormulario, 'usuario': usuario.username})

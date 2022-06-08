@@ -8,15 +8,26 @@
     Apenas llegue a una tecnicatura, ni a analista llegué. 
     Aca te muestro mis proyectos para que conozcas este lado de mí. Si me encontras capaz te cuente anecdotas</p>
 
-{% for proyecto in proyectos %}
-  
-  <li>{{proyecto}}</li>
-  <button>
-       Eliminar
-  </button>
-
-
-{% endfor %}
+<div class="container">
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>NOMBRE</td>
+                <td>AÑO</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proyecto in proyectos %}
+                <tr>
+                    <td>{{proyecto.id}}</td>
+                    <td>{{proyecto.nombre}}</td>
+                    <td>{{proyecto.año}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 <p> Tambien podes añadir algún proyecto que capaz me haya olvidado.</p>
 
@@ -37,6 +48,9 @@
     <input type="submit" value="ENVIAR">
 </form>
 
+<p> Si querés editar algún proyecto que ingresaste porque te equivocaste o eliminarlo no hay ningún problema. Anda a la url
+    de arriba, poné en vez de viajes 'eliminar_proyecto' o ' editar_proyecto' y el id del viaje a eliminar.
+</p>
 {% endblock %}
 
 {% block encabezado %}

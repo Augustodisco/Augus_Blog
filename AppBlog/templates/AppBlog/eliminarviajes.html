@@ -1,0 +1,26 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+{% for proyecto in proyectos%}
+
+<li>{{proyecto}}</li>
+<button>
+    <a href="{% url 'eliminar_viaje' viajes.id %}"> ELIMINAR </a>
+</button>
+
+{% endfor %}
+
+{% block encabezado %}
+ 
+  Eliminá algún viaje que este mal.
+
+{% endblock %}
+
+{% block titulo %} 
+
+<h1> Eliminar Viaje </h1>
+
+{% endblock %}

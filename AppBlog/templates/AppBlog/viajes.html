@@ -6,15 +6,26 @@
 
 <p> Aca te muestro mis viajes para que veas a dónde estuve</p>
 
-{% for viaje in viajes %}
-  
-  <li>{{viajes}}</li>
-  <button>
-       Eliminar
-  </button>
-
-
-{% endfor %}
+<div class="container">
+  <table class="table table-bordered text-center">
+      <thead>
+          <tr>
+              <td>ID</td>
+              <td>LUGAR</td>
+              <td>AÑO</td>
+          </tr>
+      </thead>
+      <tbody>
+          {% for viaje in viajes %}
+              <tr>
+                  <td>{{viaje.id}}</td>
+                  <td>{{viaje.destino}}</td>
+                  <td>{{viaje.año}}</td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
 
 {% if miFormulario.errors %}
 
@@ -34,7 +45,9 @@
 </form>
 
 
-
+<p> Si querés editar algún viaje que ingresaste porque te equivocaste o eliminarlo no hay ningún problema. Anda a la url
+    de arriba, poné en vez de viajes 'eliminar_viaje' o 'editar_viaje y el id del viaje a eliminar.
+</p>
 
 
 

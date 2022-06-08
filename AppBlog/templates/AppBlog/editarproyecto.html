@@ -1,0 +1,30 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+
+<form action="{% url 'editar_proyecto' id %}" method="POST"> {% csrf_token %}
+
+  <table>
+      {{miFormulario.as_table}} 
+  </table>   
+  <input type="submit" value="MODIFICAR">
+
+
+</form>
+
+{% endblock %}
+
+{% block encabezado %}
+
+  Editar Proyecto
+
+{% endblock %}
+
+{% block titulo %}
+
+    <h1> Modificar Proyecto </h1>
+
+{% endblock %}

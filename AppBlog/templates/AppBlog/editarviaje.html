@@ -1,0 +1,30 @@
+{% extends "AppBlog/padre.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+
+<form action="{% url 'editar_viaje' id %}" method="POST"> {% csrf_token %}
+
+  <table>
+      {{miFormulario.as_table}} 
+  </table>   
+  <input type="submit" value="MODIFICAR">
+
+
+</form>
+
+{% endblock %}
+
+{% block encabezado %}
+
+  Editar Viaje
+
+{% endblock %}
+
+{% block titulo %}
+
+    <h1> Modificar Viaje </h1>
+
+{% endblock %}
