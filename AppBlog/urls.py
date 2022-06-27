@@ -7,7 +7,7 @@ from django import views
 
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('home/', home, name='home'),
     path('about/', about, name='about'),
     path('educacion/',educacion , name='educacion'),
     path('proyectos/', proyectos, name='proyectos'),
