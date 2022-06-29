@@ -4,14 +4,15 @@
 
 {% block contenidoquecambia %}
 
-<p> Aca te muestro mis viajes para que veas a dónde estuve</p>
+<p align="center"> Aca te muestro mis viajes para que veas a dónde estuve. Son muchos y pueden ser más.</p>
 
+<p>
 <div class="container">
   <table class="table table-bordered text-center">
       <thead>
           <tr>
               <td>ID</td>
-              <td>LUGAR</td>
+              <td>LUGAR</td> 
               <td>AÑO</td>
           </tr>
       </thead>
@@ -26,7 +27,101 @@
       </tbody>
   </table>
 </div>
+</p>
 
+<p align="center">
+    <img src="/media/Imagenes/PlayadelCarmen.jpg" height="500" width="600"/>
+    <p align="center">
+      <b> PLAYA DEL CARMEN </b>
+    </p>
+
+    <p align="center">
+        <b> Un destino de los mas visitados en México </b>
+    </p>
+
+    <p align="center">
+        <b> ??/??/2018 ph: su servidor </b>
+    </p>
+</p>
+
+<p align="center">
+    <img src="/media/Imagenes/colonia.jpg" height="500" width="600"/>
+    <p align="center">
+      <b> COLONIA </b>
+    </p>
+
+    <p align="center">
+        <b> Mi primer viaje en barco </b>
+    </p>
+
+    <p align="center">
+        <b> 26/01/2009 ph: Eduardo Todisco </b>
+    </p>
+</p>
+
+<p align="center">
+    <img src="/media/Imagenes/houtbay.jpg" height="500" width="600"/>
+    <p align="center">
+      <b> HOUT BAY-SUDÁFRICA</b>
+    </p>
+
+    <p align="center">
+        <b> Mi primer viaje en avión, mi primer destino. </b>
+    </p>
+
+    <p align="center">
+        <b> 15/02/2008 ph: Mariel Pardo </b>
+    </p>
+</p>
+
+<p align="center">
+    <img src="/media/Imagenes/capetown.jpg" height="500" width="600"/>
+    <p align="center">
+      <b> CIUDAD DEL CABO-SUDÁFRICA </b>
+    </p>
+
+    <p align="center">
+        <b> Otro destino de mi primer viaje en avión. Y desde el mismo. </b>
+    </p>
+
+    <p align="center">
+        <b> 19/02/2008 ph: Mariel Pardo </b>
+    </p>
+</p>
+
+<p align="center">
+    <img src="/media/Imagenes/petra.jpg" height="500" width="600"/>
+    <p align="center">
+      <b> PETRA-JORDANIA</b>
+    </p>
+
+    <p align="center">
+        <b> Una ciudad de piedra. </b>
+    </p>
+
+    <p align="center">
+        <b> 14/04/2014 ph: Mariel Pardo </b>
+    </p>
+</p>
+
+<p align="center">
+    <img src="/media/Imagenes/MachuPichu.jpg" height="500" width="600"/>
+    <p align="center">
+      <b> MACHU PICCHU-PERÚ</b>
+    </p>
+
+    <p align="center">
+        <b> Una maravilla que muchos desean conocer. </b>
+    </p>
+
+    <p align="center">
+        <b> 16/04/2016 ph: Un miembro desconocido ¿Sera Blazquez? </b>
+    </p>
+</p>
+
+<p>Si me faltó algún viaje, ponelo acá: </p>
+
+<p>
 {% if miFormulario.errors %}
 
 <p style="color:red"> Los datos son incorrectos, intentá de nuevo</p>
@@ -43,15 +138,16 @@
 
     <input type="submit" value="ENVIAR">
 </form>
-
+</p>
 
 <p> Si querés editar algún viaje que ingresaste porque te equivocaste o eliminarlo no hay ningún problema. Anda a la url
-    de arriba, poné en vez de viajes 'eliminar_viaje' o 'editar_viaje y el id del viaje a eliminar.
+    de arriba, poné en vez de viajes 'eliminar_viaje' o 'editar_viaje y el id del viaje a eliminar. Podria habertelo hecho
+    dificil pero te lo hice bastante sencillo. Me costó pensarlo.
 </p>
 
 
 
-
+ 
 {% endblock %}
 
 {% block encabezado %}

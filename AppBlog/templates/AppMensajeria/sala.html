@@ -1,0 +1,36 @@
+{% extends "AppMensajeria/padre.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+
+
+
+<form id="post-form">
+  {% csrf_token %}
+  <input type="hidden" name="usuario" id="usuario" value="{{usuario}}" />
+  <input type="hidden" name="id_sala" id="id_sala" width="{{detalles_sala.id}}" />
+  <input type="text" name="usuario" id="usuario" width="100px" />
+  <input type="submit" value="Entrar">
+
+</form>
+
+
+
+
+
+
+{% endblock %}
+
+{% block encabezado %}
+ 
+  Sala de chat
+
+{% endblock %}
+
+{% block titulo %} 
+
+<h1> ¡A chatear! En la sala de  {{sala}} </h1>
+
+{% endblock %}

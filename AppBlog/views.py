@@ -158,8 +158,8 @@ def editarperfil(request):
         if miFormulario.is_valid():
             informacion=miFormulario.cleaned_data
             usuario.email=informacion['email']
-            usuario.set_password1=informacion['password1']
-            usuario.set_password2=informacion['password2']
+            usuario.set_password(informacion['password1'])
+            usuario.set_password(informacion['password2'])
             usuario.save()
 
             return render(request, 'AppBlog/home.html')

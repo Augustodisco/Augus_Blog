@@ -1,0 +1,35 @@
+{% extends "AppMensajeria/padre.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+<p> Por supuesto, como se que varias personas estaran viendo esto, les propongo que se ayuden entre ustedes para encontrarme,
+    tranquilos chicos, se que no les gustaba tener pruebas en la escuela, asi que los dejo "copiarse". O sino sigan por su cuenta
+    si es que no les gusta compartir el tesoro.
+
+</p>
+
+<form id="post-form" method="POST" action="chequearsala">
+    {% csrf_token %}
+    <label> Nombre de la sala</label>
+    <input type="text" name="nombre_sala" id="nombre_sala" width="100px" />
+    <label> Usuario </label>
+    <input type="text" name="usuario" id="usuario" width="100px" />
+    <input type="submit" value="Entrar">
+
+</form>
+
+{% endblock %}
+
+{% block encabezado %}
+ 
+  Inicio Chat
+
+{% endblock %}
+
+{% block titulo %} 
+
+<h1> Chat </h1>
+
+{% endblock %}
