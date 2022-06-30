@@ -10,3 +10,5 @@ Ya al entrar dejé dos saludos en la nav-bar y en el cuerpo del home, y la nav.b
 El home tiene que tener la descripción de la pagina y que es lo que voy a hacer, cosa que hice y tambien tengo un about con pistas poniendo quien soy. Me equivoque en no poner un instructivo para registrarse en el login, lo puse en el home.
 La respuesta obviamente es Colonia Uruguay, en la playa bajo la arena a la noche ¿Porque no puse la respuesta? Si alguien veía la pagina en desorden y ponía la respuesta en una, la descubrían al toque.
 La pagina se trata de buscar pistas haciendo lo que yo le pida, un concepto que probablemente debo pulirlo mas.
+
+Lo de la App de Mensajeria se me habia ocurrido una manera de hacerlo, mediante el concepto de una "sala de chat" en donde el nombre de la sala es de la persona a la que uno chatea pero me salió horrible. 
